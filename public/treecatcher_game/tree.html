@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #9ad69a;
+        margin: 20px;
+        padding: 20px;
+        }
+
+        #game-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: auto;
+            overflow: hidden;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            background-color: #e8f5e9;
+            }
+        #player {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #f00;
+        }
+        .entity {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            font-size: 32px;
+            text-align: center;
+            line-height: 40px;
+        }
+        #score {
+            color:#000000;
+            text-align: center;
+            margin: 20px;
+        }
+        #instructions-modal, #congratulations-modal {
+            color:#000000;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(169, 152, 152, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .close-button {
+            cursor: pointer;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        Button {
+            margin:20px;
+            padding: 10px;
+            color: green;
+            border-radius: 5px;
+        }
+
+        Button:hover {
+            margin:20px;
+            padding: 10px;
+            color: green;
+            border-radius: 5px;
+            background-color: #ccc9c9;}
+
+            .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  color:#040D12;
+  position: absolute;
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+    </style>
+    <title>Tree Catcher</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div id="score">Score: 0</div>
+    <div id="game-container">
+        <div id="player"></div>
+    </div>
+    <button id="resetButton" onclick="finishGame()">End Game</button>
+
+    <!-- Instructions Modal -->
+    <div id="instructions-modal" class="modal">
+        <div class="modal-content">
+            <p>Use arrow keys to move the player and collect sustainable items while avoiding non-sustainable ones. Reach a score of 100 to win!</p>
+            <button class="close-button">Close</button>
+        </div>
+    </div>
+
+    <div id="custom-alert" class="modal">
+        <div class="modal-content">
+            <!-- <span class="close-btn">&times;</span> -->
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-ok-btn">OK</button>
+        </div>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('game-container');
+        const player = document.getElementById('player');
+        const scoreDisplay = document.getElementById('score');
+        const instructionsModal = document.getElementById('instructions-modal');
+        const congratulationsModal = document.getElementById('congratulations-modal');
+        const closeButton = document.querySelector('.close-button');
+
+        let score = 0;
+        let playerX = 180;
+        let playerY = 180;
+        const stepSize = 10; // Smaller step size for smoother movement
+        const moveInterval = 50; // Interval for smoother movement in milliseconds
+
+        const keysPressed = {};
+
+        document.addEventListener('keydown', event => keysPressed[event.key] = true);
+        document.addEventListener('keyup', event => keysPressed[event.key] = false);
+
+        function movePlayer() {
+            if (keysPressed['ArrowUp']) playerY = Math.max(0, playerY - stepSize);
+            if (keysPressed['ArrowDown']) playerY = Math.min(gameContainer.clientHeight - 40, playerY + stepSize);
+            if (keysPressed['ArrowLeft']) playerX = Math.max(0, playerX - stepSize);
+            if (keysPressed['ArrowRight']) playerX = Math.min(gameContainer.clientWidth - 40, playerX + stepSize);
+
+            player.style.top = playerY + 'px';
+            player.style.left = playerX + 'px';
+            checkCollision();
+        }
+
+        function createItem() {
+            const item = document.createElement('div');
+            item.classList.add('entity');
+            item.style.top = Math.random() * (gameContainer.clientHeight - 40) + 'px';
+            item.style.left = Math.random() * (gameContainer.clientWidth - 40) + 'px';
+
+            const itemType = Math.random() > 0.5 ? 'sustainable' : 'non-sustainable';
+            if (itemType === 'sustainable') {
+                item.textContent = '🌳';
+                item.dataset.type = 'sustainable';
+            } else {
+                item.textContent = '🏭';
+                item.dataset.type = 'non-sustainable';
+            }
+            gameContainer.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, 5000);
+        }
+
+        function checkCollision() {
+            const items = document.querySelectorAll('.entity:not(#player)');
+            items.forEach(item => {
+                const itemRect = item.getBoundingClientRect();
+                const playerRect = player.getBoundingClientRect();
+                if (
+                    playerRect.x < itemRect.x + itemRect.width &&
+                    playerRect.x + playerRect.width > itemRect.x &&
+                    playerRect.y < itemRect.y + itemRect.height &&
+                    playerRect.y + playerRect.height > itemRect.y
+                ) {
+                    if (item.dataset.type === 'sustainable') {
+                        score += 10;
+                    } else {
+                        score -= 10;
+                    }
+                    scoreDisplay.textContent = `Score: ${score}`;
+                    item.remove();
+                    
+                    // Check if the score has reached 100
+                    if (score >= 100) {
+                        endGame();
+                    }
+                }
+            });
+        }
+
+        function endGame() {
+            // Display the congratulations modal
+            // congratulationsModal.style.display = 'flex';
+
+            // // Stop creating new items and moving the player
+            clearInterval(createItemInterval);
+            clearInterval(movePlayerInterval);
+
+            // Disable further player movement
+            // document.removeEventListener('keydown', handleKeyDown);
+            // document.removeEventListener('keyup', handleKeyUp);
+            showCustomAlert("Game Over! You have reached a score of 100.")
+        }
+
+        const movePlayerInterval = setInterval(movePlayer, moveInterval);
+        const createItemInterval = setInterval(createItem, 1000);
+
+        // Modal functionality
+        closeButton.addEventListener('click', () => {
+            instructionsModal.style.display = 'none';
+        });
+
+        window.addEventListener('load', () => {
+            instructionsModal.style.display = 'flex';
+        });
+
+        function handleKeyDown(event) {
+            keysPressed[event.key] = true;
+        }
+
+        function handleKeyUp(event) {
+            keysPressed[event.key] = false;
+        }
+
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+
+        function finishGame() {
+    window.location.href = "../index.html"; // Redirect back to the quiz page
+}
+
+function showCustomAlert(message) {
+    const modal = document.getElementById('custom-alert');
+    const messageElement = document.getElementById('custom-alert-message');
+    const okButton = document.getElementById('custom-alert-ok-btn');
+    
+    messageElement.textContent = message;
+    modal.style.display = 'block';
+
+    okButton.onclick = () => {
+        finishGame();
+    };
+}
+    </script>
+</body>
+</html>

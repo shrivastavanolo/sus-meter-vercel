@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability Meter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+<body onload="resumeQuiz()">
+    <nav class="navbar">
+        <a href="https://arcedtech.com/" class="home-icon">
+            <!-- SVG for home icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" fill="currentColor"/>
+            </svg>
+        </a>
+        <h1 class="navbar-title">Sustainability Meter</h1>
+    </nav>
+    <div class="container">
+        <div id="ageSection">
+            <h3>Name: <input type="text" id="nameP" placeholder="Enter Your Name"/></h3>
+            <h3>Age: <input type="number" id="ageInput" min="8" max="99"  placeholder="Enter Your Age"/></h3>
+            <h3>Email: <input type="email" id="emailId"  placeholder="Enter Your Email Id" required/></h3>
+            <button onclick="showQuestion()">Start Quiz</button>
+        </div>
+        <div id="quizSection" style="display: none;">
+            <div id=buttons><div id="questionNumber"></div>
+            <button onclick="restartQuiz()" style="margin-top: auto;" >Restart</button>
+            </div>
+            <div id="question"></div>
+            <div id="desc"></div>
+            <!-- <input type="range" id="slider" min="0" max="5" value="0" /> -->
+            <div id="radioButtons">
+                <div>
+                    <input type="radio" id="option1" name="answer" value="0" />
+                    <label for="option1">Never</label>
+                </div>
+                <div>
+                    <input type="radio" id="option2" name="answer" value="1" />
+                    <label for="option2">Sometimes (around 30% of the time)</label>
+                </div>
+                <div>
+                    <input type="radio" id="option3" name="answer" value="2" />
+                    <label for="option3">Usually (around 70% of the time)</label>
+                </div>
+                <div>
+                    <input type="radio" id="option4" name="answer" value="3" />
+                    <label for="option4">Always</label>
+                </div>
+                <div>
+                    <input type="radio" id="option5" name="answer" value="4" />
+                    <label for="option5">Have never thought about it/Not in my control</label>
+                </div>
+                <div>
+                    <input type="radio" id="option6" name="answer" value="5" />
+                    <label for="option6">Not Applicable/Can’t Say</label>
+                </div>
+            </div>
+            <button onclick="submitAnswer()">Next</button>
+
+        </div>
+        <div id="resultSection" style="display: none; ">
+            <h2 id="quizRes">Quiz Result</h2>
+            <img id="meterImage" src="" alt="meter Image" style="margin: auto"/>
+
+            <div id="resultMessage"></div>
+            <img id="resultImage" src="" alt="Result Image" style="margin: auto"/>
+
+            <button onclick="restartQuiz()">Restart Quiz</button>
+
+        </div>
+        <!-- Custom Alert Modal -->
+        <div id="customAlert" class="custom-alert">
+            <div class="custom-alert-content">
+            <span id="customAlertMessage"></span>
+            <button id="customAlertButton" onclick="closeCustomAlert()">OK</button>
+            </div>
+        </div>
+
+        <div id="gameAlert" class="custom-alert">
+            <div class="custom-alert-content">
+            <span id="gameAlertMessage"></span>
+            <button id="customAlertButton" onclick="closeGameAlert()">OK</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

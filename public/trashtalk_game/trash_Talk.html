@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Talk</title>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="trash_Talk.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div id="game-container">
+        <h1>Trash Talk</h1>
+        <div id="instructions">
+            <p>Drag and drop the items into the correct bins to earn points. You lose points for incorrect placements. The game lasts for 60 seconds. Good luck!</p>
+        </div>
+        <div id="score">Score: 0</div>
+        <div id="time">Time: 30s</div>
+        <div id="item" draggable="true">🍎</div>
+        <div id="item-name" style="margin-bottom: 20px;">Apple</div>
+        <div id="game-area">
+            <div class="bin" data-type="♻️" style="background-color: #81c784;">♻️</div>
+            <div class="bin" data-type="🗑️" style="background-color: #4fc3f7;">🗑️</div>
+            <div class="bin" data-type="🍂" style="background-color: #ffd54f;">🍂</div>
+        </div>
+        <div id="game-name">
+            <p>Recycle</p>
+            <p>Waste</p>
+            <p>Compost</p>
+        </div>
+        <button id="start-btn">Start Game</button>
+        <button id="resetButton" onclick="finishGame()">Skip Game</button>
+    </div>
+    <div id="custom-alert" class="modal">
+        <div class="modal-content">
+            <!-- <span class="close-btn">&times;</span> -->
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-ok-btn">OK</button>
+        </div>
+    </div>
+    <script src="trash_Talk.js"></script>
+</body>
+</html>

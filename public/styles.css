@@ -1,0 +1,289 @@
+@font-face {
+  font-family: manrope;
+  src: url("manrope.ttf");
+}
+
+body {
+    font-family: manrope;
+    background-image: url("R.jpg");
+    background-size: cover;
+    /* background-size:cover; */
+    /* margin-bottom: 100px;
+    margin-top: 100px; */
+    /* padding: 0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    flex-direction: column;
+  }
+  
+  .container {
+    background-color: rgba(255, 255, 255, 0.7); ;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    margin-top: 200px;
+    margin-bottom: 200px;
+  }
+  
+
+  .headings {
+    margin-top: 30px;
+    text-align: center;
+    font-family: manrope;
+  }
+
+  /* General Styles for Radio Button Container */
+#radioButtons {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#radioButtons label {
+  /* display: flex; */
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+#radioButtons input[type="radio"] {
+  margin-right: 10px;
+  accent-color: #1a6d3b; 
+} 
+
+#selectedOption {
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#radioButtons input[type="radio"]:checked + label {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 5px;
+}
+    
+  h3 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  
+  input[type="number"], input[type="text"],input[type="email"]
+  {
+    width: 95%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  #quizSection {
+    display: none;
+    
+  }
+
+  #resultSection {
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  #questionNumber,
+  #question
+  {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+    
+    padding: 10px;
+  }
+
+  #desc {
+    padding: 10px;
+    font-style: italic;
+    font-size: 15px;
+    color: #19361e;
+    opacity: calc(0.9);
+    text-align: justify;
+  }
+  
+  #questionNumber {
+    /* margin-bottom: 10px; */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: justify;
+    font-size: small;
+  }
+  
+  #quizRes {
+    font-size: 24px;
+    color: #28a745;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  #resultImage  {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+  }
+
+  #meterImage {
+    width: 300px;
+    height: 280px;
+    margin-top: 20px;
+  }
+  
+  #re {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+  }
+
+  .imgw {
+    display: block;
+    margin: auto;
+    width: 400px;
+    height: 200px;
+    margin-top: 20px;
+  }
+  
+  #ageSection{
+    text-align: center;
+  }
+
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .button,button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .button:hover, button:hover {
+    background-color: #45a049;
+  }
+  
+  /* footer {
+    text-align: center;
+    font-style: italic;
+  } */
+  .emoji-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px;
+    height: auto;
+  }
+  
+  /* Navbar styles */
+.navbar {
+  width: 100%;
+  margin-bottom: 20px;;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  background-color: rgb(0,0,0,0.4);
+  padding: 5px;
+  color: white;
+  top: 0;
+  height:fit-content;
+  box-shadow: #19361e;
+}
+
+.navbar-title {
+  flex-grow: 1;
+  /* text-align: center; */
+  font-size: 1.5em;
+  font-weight: bold;
+  
+}
+
+.home-icon {
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  background-color: rgba(41, 41, 41, 0.4);
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: #19361e;
+}
+
+.home-icon svg {
+  fill: white;
+  transition: fill 0.3s;
+}
+
+.home-icon:hover svg {
+  fill: #ddd;
+}
+
+#buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 2px solid black; */
+  margin-bottom: 20px;
+}
+
+/* Custom Alert Modal CSS */
+.custom-alert {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.custom-alert-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  /* margin-right: 30px; */
+  padding: 20px;
+  border: 1px solid #888;
+  width: fit-content; /* Could be more or less, depending on screen size */
+  max-width: 700px;
+  text-align: center;
+}
+
+#customAlertButton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+#customAlertButton:hover {
+  background-color: #45a049;
+}
+
+#customAlertMessage, #gameAlertMessage {
+  margin:20px;
+}

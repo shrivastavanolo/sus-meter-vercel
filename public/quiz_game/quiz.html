@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability Quest</title>
+    <link rel="stylesheet" href="quiz.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div id="game-container">
+        <h1>Sustainability Quest: Eco Village Builder</h1>
+        <div id="eco-score">Sustainability Score: <span id="score">0</span></div>
+        <div id="story"></div>
+        <div id="choices"></div>
+        <button id="resetButton" onclick="finishGame()">Skip Game</button>
+        <div id="tree-container"></div>
+
+    </div>
+    <div id="custom-alert" class="modal">
+        <div class="modal-content">
+            <!-- <span class="close-btn">&times;</span> -->
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-ok-btn">OK</button>
+        </div>
+    </div>
+    <script src="quiz.js"></script>
+</body>
+</html>

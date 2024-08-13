@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #e0f7fa;
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  #totalScore,.score-container {
+    color:#45a049;
+    font-size: 24px;
+    /* margin: auto; */
+  }
+  
+  #item-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    /* height: 120px; */
+  }
+  
+  .game-description{
+    width:fit-content;
+    max-width: 700px;
+    text-align: justify;
+  
+  }
+  
+  #appliances-container {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    gap: 10px;
+    margin: auto;
+  }
+  
+  .appliance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid #c8e6c9;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, filter 0.3s ease;
+  }
+  
+  .appliance span {
+    font-size: 48px; /* Increased size for larger emojis */
+  }
+  
+  .appliance p {
+    margin: 5px 0 0 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .appliance.on {
+    filter: brightness(1);
+  }
+  
+  .appliance.off {
+    filter: brightness(0.5);
+  }
+
+  #timer {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  #turn-off-appliances-container{
+    flex-direction: column;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    background-color: #e8f5e9;
+  }
+
+  button {
+    width: fit-content;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Adjusted margin-top */
+    display: block;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  color:#040D12;
+  position: absolute;
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+  

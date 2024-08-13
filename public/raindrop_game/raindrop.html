@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Drop Catcher</title>
+    <link rel="stylesheet" href="raindrop.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="score">Score: 0</div>
+        <div id="lives">Lives: 5</div>
+        <div id="gameOver" class="hidden">
+            <h2>Game Over</h2>
+            <p>Your Score: <span id="finalScore"></span></p>
+            <button id="continueBtn">Continue</button>
+        </div>
+        <div id="instructionPanel" class="instruction-panel hidden">
+            <h2>How to Play Cloud Catcher</h2>
+            <ul>
+              <li>Move the cloud left and right to catch falling water drops.</li>
+              <li>Use left and right arrow keys on desktop, or touch the left/right side of the screen on mobile.</li>
+              <li>Each caught drop increases your score by 1.</li>
+              <li>You start with 6 lives. Lose a life when a drop reaches the bottom.</li>
+              <li>The game ends when you lose all lives or reach a score of 10.</li>
+            </ul>
+            <button id="closeInstructionsBtn">Close Instructions</button>
+          </div>
+          <button id="resetButton" onclick="finishGame()">Skip Game</button>
+    </div>
+    <div id="custom-alert" class="modal">
+        <div class="modal-content">
+            <!-- <span class="close-btn">&times;</span> -->
+            <p id="custom-alert-message"></p>
+            <button id="custom-alert-ok-btn">OK</button>
+        </div>
+    </div>
+    <script src="raindrop.js"></script>
+</body>
+</html>
